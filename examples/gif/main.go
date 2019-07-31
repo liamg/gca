@@ -63,7 +63,7 @@ func createImageFromGrid(grid *gca.Grid) image.Image {
 }
 
 func createGif(images []image.Image, path string) {
-	// load static image and construct outGif
+
 	outGif := &gif.GIF{}
 	for _, img := range images {
 		palettedImage := image.NewPaletted(img.Bounds(), palette.Plan9)
@@ -72,7 +72,6 @@ func createGif(images []image.Image, path string) {
 		outGif.Delay = append(outGif.Delay, 50)
 	}
 
-	// save to out.gif
 	f, _ := os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0600)
 	defer f.Close()
 	gif.EncodeAll(f, outGif)
