@@ -18,7 +18,7 @@ type Grid struct {
 	minNeighboursToRemain int
 }
 
-// NewGrid creates a new Gridof the given dimensions
+// NewGrid creates a new Grid of the given dimensions
 func NewGrid(width int, height int) *Grid {
 	return &Grid{
 		w:                     width,
@@ -33,6 +33,7 @@ func NewGrid(width int, height int) *Grid {
 
 // SetSeed sets the seed to use to generate random numbers.
 // These are used to initialise the grid's cells to a "random" state.
+// By default, the seed will be set to time.Now().UnixNano()
 func (g *Grid) SetSeed(seed int64) {
 	g.seed = seed
 }
