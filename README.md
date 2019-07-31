@@ -20,7 +20,7 @@ go get -u github.com/liamg/gca
 
 ## Usage Example
 
-```
+```go
 package main
 
 import (
