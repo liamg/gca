@@ -1,5 +1,7 @@
 # Go Cellular Automata
 
+[![GoDoc](https://godoc.org/github.com/liamg/gca?status.svg)](https://godoc.org/github.com/liamg/gca)
+
 A simple cellular automata package, useful for procedural generation.
 
 Configurable, but has a helpful out of the box config that meets basic needs. Currently uses [Moore neighbourhoods](https://en.wikipedia.org/wiki/Moore_neighborhood).

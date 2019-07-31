@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Grid is a 2 dimensional grid of cells
 type Grid struct {
 	w                     int
 	h                     int
@@ -17,6 +18,7 @@ type Grid struct {
 	minNeighboursToRemain int
 }
 
+// NewGrid creates a new Gridof the given dimensions
 func NewGrid(width int, height int) *Grid {
 	return &Grid{
 		w:                     width,
@@ -29,22 +31,28 @@ func NewGrid(width int, height int) *Grid {
 	}
 }
 
+// SetSeed sets the seed to use to generate random numbers.
+// These are used to initialise the grid's cells to a "random" state.
 func (g *Grid) SetSeed(seed int64) {
 	g.seed = seed
 }
 
+// SetMinNeighboursToBirth sets the minimum number of "alive" neighbours a cell must have to be "birthed" (set to alive)
 func (g *Grid) SetMinNeighboursToBirth(count int) {
 	g.minNeighboursToBirth = count
 }
 
+// SetMinNeighboursToRemain sets the minimum number of "alive" neighbours a cell must have to remain "alive"
 func (g *Grid) SetMinNeighboursToRemain(count int) {
 	g.minNeighboursToRemain = count
 }
 
+// SetInitialisationChance sets the chance (in [0.00, 1.00]) that a cell will be initialised to "alive"
 func (g *Grid) SetInitialisationChance(chance float64) {
 	g.initialisationChance = chance
 }
 
+// Initialise sets the grid's cells to a random initial state
 func (g *Grid) Initialise() {
 	g.mut.Lock()
 	defer g.mut.Unlock()
@@ -57,10 +65,12 @@ func (g *Grid) Initialise() {
 	}
 }
 
+// Size returns the dimensions (width, height) of the grid
 func (g *Grid) Size() (int, int) {
 	return g.w, g.h
 }
 
+// Run effectively runs Step() the supplied number of times
 func (g *Grid) Run(steps int) {
 	for i := 0; i < steps; i++ {
 		g.Step()
@@ -86,6 +96,7 @@ func (g *Grid) countNeighbours(x, y int) int {
 	return count
 }
 
+// Step applies the configured rules to the grid's cells once
 func (g *Grid) Step() {
 	g.mut.Lock()
 	defer g.mut.Unlock()
@@ -106,6 +117,7 @@ func (g *Grid) Step() {
 	g.data = newMap
 }
 
+// Read returns the state (alive/dead) of the cell at the given coordinates
 func (g *Grid) Read(x, y int) bool {
 	g.mut.RLock()
 	defer g.mut.RUnlock()
